@@ -1,0 +1,13 @@
+(env
+  (dev
+    (flags (:standard -warn-error -A))))
+
+(executable
+  (name llvm_program)
+  (libraries
+    llvm
+    llvm.analysis
+    llvm.bitwriter
+    llvm.bitreader
+  )
+)

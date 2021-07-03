@@ -1,0 +1,5 @@
+_build/
+to_llvm
+.DS_STORE
+.vscode/
+test
