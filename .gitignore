@@ -1,5 +1,8 @@
 _build/
-to_llvm
+llvm_program
 .DS_STORE
 .vscode/
 test
+*.ll
+*.bc
+*.s
