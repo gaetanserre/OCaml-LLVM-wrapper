@@ -102,7 +102,7 @@ module Expr = struct
 end
 
 module Stmt = struct
-  let assign v1 v2 builder = Llvm.build_store v1 v2 builder
+  let assign value dest builder = Llvm.build_store value dest builder
   let call func args builder = Llvm.build_call func args "" builder
   let return v builder = Llvm.build_ret v builder
 end
