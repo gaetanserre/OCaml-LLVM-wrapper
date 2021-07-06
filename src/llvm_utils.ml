@@ -99,6 +99,12 @@ module Expr = struct
 
   let div ?(name = "") v1 v2 builder = 
     Llvm.build_sdiv v1 v2 name builder
+  
+  let minus ?(name = "") v builder =
+    Llvm.build_fneg v name builder
+
+  let eq ?(name = "") v1 v2 builder = 
+    Llvm.build_icmp Llvm.Icmp.Eq v1 v2 name builder
 end
 
 module Stmt = struct
