@@ -2,7 +2,6 @@ _build/
 llvm_program
 .DS_STORE
 .vscode/
-test
 *.ll
 *.bc
 *.s
