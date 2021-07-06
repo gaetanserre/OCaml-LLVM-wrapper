@@ -49,6 +49,8 @@ module Writer = struct
 end
 
 module Type = struct
+  let void = Llvm.void_type Utils.llctx
+  let bool = Llvm.i1_type Utils.llctx
   let i8 = Llvm.i8_type Utils.llctx
   let i32 = Llvm.i32_type Utils.llctx
   let i64 = Llvm.i64_type Utils.llctx
@@ -100,15 +102,38 @@ module Expr = struct
   let div ?(name = "") v1 v2 builder = 
     Llvm.build_sdiv v1 v2 name builder
   
-  let minus ?(name = "") v builder =
+  let neg ?(name = "") v builder =
     Llvm.build_fneg v name builder
 
-  let eq ?(name = "") v1 v2 builder = 
+  let not ?(name = "") v builder =
+    Llvm.build_not v name builder
+  
+  let eq ?(name = "") v1 v2 builder =
     Llvm.build_icmp Llvm.Icmp.Eq v1 v2 name builder
+
+  let gt ?(name = "") v1 v2 builder =
+    Llvm.build_icmp Llvm.Icmp.Sgt v1 v2 name builder
+  
+  let lt ?(name = "") v1 v2 builder =
+    Llvm.build_icmp Llvm.Icmp.Slt v1 v2 name builder
+
+  let ge ?(name = "") v1 v2 builder =
+    Llvm.build_icmp Llvm.Icmp.Sge v1 v2 name builder
+  
+  let le ?(name = "") v1 v2 builder =
+    Llvm.build_icmp Llvm.Icmp.Sle v1 v2 name builder
+  
+  let ll_or ?(name = "") v1 v2 builder =
+    Llvm.build_or v1 v2 name builder
+  
+  let ll_and ?(name = "") v1 v2 builder =
+    Llvm.build_and v1 v2 name builder
+  
 end
 
 module Stmt = struct
   let assign value dest builder = Llvm.build_store value dest builder
   let call func args builder = Llvm.build_call func args "" builder
   let return v builder = Llvm.build_ret v builder
+  let return_void builder = Llvm.build_ret_void builder
 end
