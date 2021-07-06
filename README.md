@@ -5,7 +5,7 @@ Use `./build/bc_to_llvm input_file.bc [output_file]` to convert *llvm ir* byteco
 
 Use `cd build && make && ./main [output_file]` to generate two little *llvm ir* programs:
 
-1. `sum.ll`
+1. `sum.ll` corresponds to:
 ```c
 #include <stdio.h>
 
@@ -26,7 +26,7 @@ int main () {
 }
 ```
 
-2. `comps.ll`
+2. `comps.ll` corresponds to:
 ```c
 #include <stdio.h>
 
