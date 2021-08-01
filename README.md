@@ -1,4 +1,4 @@
-# Ocaml LLVM IR Compiler
+# Ocaml LLVM IR Wrapper
 
 Use `./build/bc_to_llvm input_file.bc [output_file]` to convert *llvm ir* bytecode to human-readable *llvm ir*
 
