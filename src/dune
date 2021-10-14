@@ -4,10 +4,4 @@
 
 (executable
   (name main)
-  (libraries
-    llvm
-    llvm.analysis
-    llvm.bitwriter
-    llvm.bitreader
-  )
 )
