@@ -1,5 +1,5 @@
 _build/
-llvm_program
+main
 .DS_STORE
 .vscode/
 *.ll

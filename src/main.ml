@@ -2,18 +2,23 @@ open Llvm_wrapper
 let _ =
   let prog = Llvm.create_program "test_ml.ll" in
 
-  let sum = Llvm.create_function "sum" I32 [I32, "x"; I32, "y"] in
-  let res = Llvm.Assign ("res", Binop (Add, I32, Var "x", Var "y")) in
-  Llvm.add_code sum res;
-  Llvm.add_code sum (Return (I32, Var "res"));
+  let apply = Llvm.create_function "@apply" I32 [I32, "%a"; FPointer (I32, [I32]), "%func"] in
+  let res = Llvm.Assign ("%res", Llvm.CallPointer (Var "%func", I32, [I32, Var "%a"])) in
+  Llvm.add_code apply res;
+  Llvm.add_code apply (Llvm.Return (I32, Var "%res"));
+  Llvm.add_function prog apply;
+
+  let by2 = Llvm.create_function "@by2" I32 [I32, "%a"] in
+  let res = Llvm.Assign ("%res", Llvm.Binop (Mul, I32, Cst 2, Var "%a")) in
+  Llvm.add_code by2 res;
+  Llvm.add_code by2 (Llvm.Return (I32, Var "%res"));
+  Llvm.add_function prog by2;
 
   let main = Llvm.create_main_function () in
 
-  let res = Llvm.Assign ("res", Llvm.Call ("sum", I32, [I32, Cst 105; I32, Cst 2015])) in
+  let res = Llvm.Assign ("%res", Llvm.Call ("@apply", I32, [I32, Cst 8; FPointer (I32, [I32]), Var "@by2"])) in
   Llvm.add_code main res;
   Llvm.add_code main (Return (I32, Cst 0));
-
-  Llvm.add_function prog sum;
   Llvm.add_function prog main;
 
-  Llvm.compile_llvm_program prog
+  Llvm.build_llvm_program prog
