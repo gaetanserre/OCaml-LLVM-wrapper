@@ -1,13 +1,13 @@
 #include <iostream>
 
-int apply (int a, int (*func)(int)) {
-  return (*func)(a);
+int add (int nb[3]) {
+  return nb[0] + nb[1] + nb[2];
 }
 
-int by2 (int a) { return 2 * a; }
-
 int main () {
-  int res = apply(85, *by2);
-  printf("%d\n", res);
-  return 0;
+  int res [3] = {0,1,3};
+  printf("%d\n", res[1]);
+  res[1] = 23;
+  printf("%d\n", add(res));
+  return res[0];
 }

@@ -3,7 +3,7 @@ let _ =
   let prog = Llvm.create_program "test_ml.ll" in
 
   let apply = Llvm.create_function "@apply" I32 [I32, "%a"; FPointer (I32, [I32]), "%func"] in
-  let res = Llvm.Assign ("%res", Llvm.CallPointer (Var "%func", I32, [I32, Var "%a"])) in
+  let res = Llvm.Assign ("%res", Llvm.CallPointer ("%func", I32, [I32, Var "%a"])) in
   Llvm.add_code apply res;
   Llvm.add_code apply (Llvm.Return (I32, Var "%res"));
   Llvm.add_function prog apply;
