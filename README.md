@@ -3,4 +3,4 @@
 A library to write LLVM IR programs easily within OCaml code
 
 ## License
-[GPL v3](https://choosealicense.com/licenses/gpl-3.0/)
+[MIT](https://choosealicense.com/licenses/mit/#)
